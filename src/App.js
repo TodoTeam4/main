@@ -9,26 +9,35 @@ import TodoInsert from "./components/TodoInsert";
 let nextId = 4;
 
 const App = () => {
+  const [selectedTodo, setSelectedTodo] = useState(null);
   const [insertToggle, setInsertToggle] = useState(false);
   const [todos, setTodos] = useState([
     {
     id: 1,
-    text: "할일 1",
+    text: "빵 먹기",
     checked: true
     }, 
     {
       id: 2,
-      text: "할일 2",
+      text: "과자 먹기",
       checked: true
       },
       {
         id: 3,
-        text: "할일 3",
-        checked: true
+        text: "젤리 먹기",
+        checked: false
+        } ,
+      {
+        id: 4,
+        text: "술 먹기",
+        checked: false
         } 
     
     ]);
    const onInsertToggle = () => {
+    if(selectedTodo) {
+      setSelectedTodo(null);
+    }
       setInsertToggle(prev => !prev);  //이전값의 boolean을 반대로 바꿔주는 함수
     };
 
@@ -57,16 +66,45 @@ const App = () => {
       
     };
 
+    const onChangeSelectedTodo = (todo) => {
+      setSelectedTodo(todo)
+    
+    }
+
+    const onRemove = id => {
+      onInsertToggle();
+      setTodos(todos => todos.filter(todo => todo.id !==id))
+    };
+    // const onRemove = id => {
+    //   onInsertToggle();
+    //   setTodos(todos => todos.filter(todo => todo.id !== id)); //ID와 일치하지 않는것만 리턴
+    // };
+
+    const onUpdate = (id,text) => {
+      onInsertToggle();
+      setTodos(todos => todos.map(todo => todo.id === id ? {...todo, text} : todo));
+    }
+
   return (
   <Template todoLength={todos.length}>
-    <TodoList todos={todos} onCheckToggle={onCheckToggle} />
+    <TodoList 
+    todos={todos} 
+    onCheckToggle={onCheckToggle} 
+    onInsertToggle={onInsertToggle} 
+    onChangeSelectedTodo={onChangeSelectedTodo}
+    
+    />
+    
     <div className='add-todo-btn' onClick={ onInsertToggle}>
       <MdAddCircle/>
     </div>
     {insertToggle && (
     <TodoInsert 
-    onInsertToggle={onInsertToggle}
-    onInsertTodo={onInsertTodo}
+      selectedTodo={selectedTodo}
+      onInsertToggle={onInsertToggle}
+      onInsertTodo={onInsertTodo}
+      onRemove={onRemove}
+      onUpdate={onUpdate}
       />
     )}
     </Template>

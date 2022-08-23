@@ -1,8 +1,9 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { MdAddCircle } from 'react-icons/md';
+import { TiTrash, TiPencil } from 'react-icons/ti';
 import './TodoInsert.css';
 
-const TodoInsert = ({onInsertToggle, onInsertTodo}) => {
+const TodoInsert = ({onInsertToggle, onInsertTodo, selectedTodo, onRemove, onUpdate}) => {
     const [value, setValue] = useState("");  //기본값 빈문자열
 
     const onChange = (e) => {
@@ -17,20 +18,44 @@ const TodoInsert = ({onInsertToggle, onInsertTodo}) => {
     
     
     }
+
+    useEffect(()=>{
+        if(selectedTodo) {
+            setValue(selectedTodo.text);
+        }
+    },[selectedTodo]);                                         //렌더링이 되면 컴포넌트가 처음 렌더링 되면은 어떤것을 실행하느냐를 처리
     return  (
     <div>
         <div className='background' onClick={onInsertToggle}></div>
-            <form onSubmit={onSubmit}>
-                <input placeholder='Please Write' value={value} onChange={onChange}></input>
+            <form onSubmit={selectedTodo ? () => {onUpdate(selectedTodo.id,value)} : onSubmit}>
+                <input 
+                placeholder='Please Write' 
+                value={value} 
+                onChange={onChange}
+                ></input>
+                {selectedTodo ? (
+                    <div className='rewrite'>
+                        <TiPencil onClick={() => {
+                            onUpdate(selectedTodo.id, value)
+                            }}   />
+                        <TiTrash 
+                        onClick={() => {
+                            onRemove(selectedTodo.id);
+                            }}  
+                          />
+                    </div>
+
+                ) : (
                 <button type='submit'>
                     <MdAddCircle/>
                 </button>
+                )}
             
        
             </form>
     </div>
-    )
-}
+    );
+};
 
 
 
