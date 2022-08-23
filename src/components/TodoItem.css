@@ -33,7 +33,7 @@
 }
 
 .content.checked .text{
-    color: blue;
+    color: skyblue;
     text-decoration: line-through;
     cursor: pointer;
     opacity: 0.6;
