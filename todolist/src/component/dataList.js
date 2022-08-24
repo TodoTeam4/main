@@ -8,8 +8,6 @@ const DataList = ({finish, onDelete, data})=>{
   //   setCheck(!check)
   // }
 
-
-  
   return (
       <div className="hi_data">
       <p>할 일 목록!</p>

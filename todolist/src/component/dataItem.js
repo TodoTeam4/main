@@ -3,26 +3,16 @@ const DataItem = ({onDelete,id,text})=>{
   const [checkedBox, setCheckedBox] = useState([])
 
   const finish = (targetId,checked) =>{
-    if(checked){
-      setCheckedBox([...checkedBox, targetId, text])
-      console.log('체크')
-      console.log(checkedBox)
-    } else {
-      setCheckedBox(checkedBox.filter(checkbox => checkbox.targetId !== targetId))
-      console.log('체크 안 했지')
-    }
+    setCheckedBox([...checkedBox, targetId, text, checked])
+    console.log(checkedBox)
       
     }
 
-    // const style_item = {
-    //   checkBox: {
-    //     text
-    //   }
-    // }
 
   return  (<div className="data_item">
   <span>
-    <input key={id} className="checkBox" type="checkbox" onChange={(e)=>{finish(id, 'check')}} checked = {checkedBox.includes('check')? true : false}/>
+    <input key={id} className="checkBox" type="checkbox" onChange={(e)=>{finish(id, 'true')}}
+     checked = {checkedBox.checked}/>
      {text}   
     <button onClick={()=>{
       console.log(id)
