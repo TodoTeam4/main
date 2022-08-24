@@ -15,6 +15,7 @@ function App() {
 const [data, setData] = useState([])
 const dataId = useRef(1)
 
+
 const Update= (text,id) => {
   // const created_data = new Date().getTime()
   const newItem = {text,id:dataId.current}
@@ -27,6 +28,7 @@ const onDelete = (targetId) =>{
   const newDataList = data.filter((it)=> it.id !== targetId)
   setData(newDataList)
 }
+
 
 
   return (
