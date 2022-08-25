@@ -19,6 +19,6 @@
 
 
 .onChecked {
-  color: red;
+  color: gray;
   text-decoration-line: line-through;
 }

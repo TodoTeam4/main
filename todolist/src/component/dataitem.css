@@ -6,6 +6,6 @@
   margin-right:10px;
 }
 .checked {
-  color: grey;
   text-decoration-line: line-through;
+  color:gray;
 }

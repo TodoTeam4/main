@@ -13,18 +13,13 @@ const DataItem = ({onDelete,id,text})=>{
   const checkHandle = (target) =>{
     if(checkedBox === false){
        setCheckedBox(true)
-       toggleHandle(target)
     } else {
       setCheckedBox(false)
-      toggleHandle(target)
+    
     }
     
   }
-    const toggleHandle = (targetid) =>{
-      if(targetid === id){
-        console.log(targetid)
-      }
-    }
+
 
   return  (
   <div className="data_item">
