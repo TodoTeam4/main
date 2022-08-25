@@ -1,0 +1,11 @@
+.data_item{
+  display: flex;
+}
+.item_text{
+  margin-left:10px;
+  margin-right:10px;
+}
+.checked {
+  color: grey;
+  text-decoration-line: line-through;
+}

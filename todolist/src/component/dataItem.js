@@ -1,24 +1,40 @@
 import { useState } from "react"
-const DataItem = ({onDelete,id,text})=>{
-  const [checkedBox, setCheckedBox] = useState([])
+import {TiDeleteOutline } from 'react-icons/ti';
 
-  const finish = (targetId,checked) =>{
-    setCheckedBox([...checkedBox, targetId, text, checked])
-    console.log(checkedBox)
+import './dataitem.css';
+const DataItem = ({onDelete,id,text})=>{
+  const [checkedBox, setCheckedBox] = useState(false)
+  const [toggle, setToggle] = useState('')
+  // const finish = (targetId,checked) =>{
+  //   setCheckedBox([...checkedBox, targetId, text, checked])
+  //   console.log(checkedBox)
       
+  //   }
+  const checkHandle = (target) =>{
+    if(checkedBox === false){
+       setCheckedBox(true)
+       toggleHandle(target)
+    } else {
+      setCheckedBox(false)
+      toggleHandle(target)
+    }
+    
+  }
+    const toggleHandle = (targetid) =>{
+      if(targetid === id){
+        console.log(targetid)
+      }
     }
 
-
-  return  (<div className="data_item">
-  <span>
-    <input key={id} className="checkBox" type="checkbox" onChange={(e)=>{finish(id, 'true')}}
-     checked = {checkedBox.checked}/>
-     {text}   
-    <button onClick={()=>{
+  return  (
+  <div className="data_item">
+    <input key={id} className={toggle} type="checkbox" checked={checkedBox} id={id}onChange={(e)=>{checkHandle(e.target.id)}}/>
+     <div className={`item_text ${checkedBox  === true ? "checked" : ""}`}>{text}</div> 
+     <TiDeleteOutline onClick={()=>{
       console.log(id)
-      onDelete(id)}} >X</button>
-  </span>
-</div>
+      onDelete(id)} } />
+  </div>
+
   )
 }
 

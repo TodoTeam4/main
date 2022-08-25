@@ -14,7 +14,7 @@ const DataList = ({finish, onDelete, data})=>{
       {/* <input className="check_all" type="checkbox" onChange={allCheck}/> 모두 선택 */}
       <div>{data.map((it)=>{
         return (
-          <DataItem key={it.id}{...it} onDelete={onDelete} finish={finish}/>
+          <DataItem key={it.id} {...it} onDelete={onDelete} finish={finish}/>
         )})}
       </div>
     </div>
